@@ -1,6 +1,5 @@
 const { servers_model, users_model, events_model } = require('../../models');
 const { json2string } = require('../../utils/jon2str');
-const sentTime = new Date().getTime();
 let bot = null
 if (bot == null) {
   bot = require('../../qq/bot');
@@ -64,11 +63,12 @@ class eventController {
       const contentArr = []
       eventData.map(item => {
         item.missionhash = msg.data.missionhash
-        contentArr.push(item.content)
+        if (item.eventName == 'kill') {
+          contentArr.push(item.content)
+        }
       })
       events_model.bulkCreate(eventData)
-      // console.log(sentTime, new Date().getTime(), new Date().getTime() - sentTime);
-      if (new Date().getTime() - sentTime > 600000 && contentArr.length > 0) {
+      if (contentArr.length > 0) {
         var message = [
           {
             type: "text",
@@ -79,7 +79,6 @@ class eventController {
         ]
         if (!bot || !qq_group) return;
         bot.sendGroupMsg(qq_group[0], message);
-        sentTime = new Date().getTime()
       }
     }
   }
