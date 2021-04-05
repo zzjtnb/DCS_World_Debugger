@@ -1,5 +1,11 @@
 const { servers_model, users_model, events_model } = require('../../models');
 const { json2string } = require('../../utils/jon2str');
+const sentTime = new Date().getTime();
+let bot = null
+if (bot == null) {
+  bot = require('../../qq/bot');
+}
+const { qq_group } = require('../../config/qq');
 class eventController {
   async UpdatePlayersData(msg) {
     const PlayerData = msg.data.PlayerData
@@ -54,8 +60,28 @@ class eventController {
       }
     )
     const eventData = msg.data.eventData
-    eventData.map(item => { item.missionhash = msg.data.missionhash })
-    events_model.bulkCreate(eventData)
+    if (eventData) {
+      const contentArr = []
+      eventData.map(item => {
+        item.missionhash = msg.data.missionhash
+        contentArr.push(item.content)
+      })
+      events_model.bulkCreate(eventData)
+      // console.log(sentTime, new Date().getTime(), new Date().getTime() - sentTime);
+      if (new Date().getTime() - sentTime > 600000 && contentArr.length > 0) {
+        var message = [
+          {
+            type: "text",
+            data: {
+              text: `${contentArr.join('\n')}`
+            }
+          },
+        ]
+        if (!bot || !qq_group) return;
+        bot.sendGroupMsg(qq_group[0], message);
+        sentTime = new Date().getTime()
+      }
+    }
   }
   async UpdateMission(msg) {
     const data = await json2string(msg.data);

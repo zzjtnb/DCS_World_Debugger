@@ -25,7 +25,7 @@ event.on('UpdatePlayersData', async (msg) => {
 });
 let msg = {
   "data": {
-    "data": {
+    "PlayerData": {
       "t": {
         "ucid": "t",
         "airfield_takeoffs": 1,
@@ -35,11 +35,12 @@ let msg = {
         "airfield_takeoffs": 5,
       }
     },
+    eventData: [{ content: '击杀' }],
     "theatre": "Caucasus",
     "count_players": 2
   }
 }
-// gameEvent.UpdatePlayersData(msg)
+gameEvent.UpdatePlayersData(msg)
 //每一帧渲染的hook
 event.on('onSimulationFrame', (msg) => {
   // console.log(msg);
