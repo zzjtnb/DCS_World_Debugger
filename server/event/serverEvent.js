@@ -40,7 +40,7 @@ let msg = {
     "count_players": 2
   }
 }
-gameEvent.UpdatePlayersData(msg)
+// gameEvent.UpdatePlayersData(msg)
 //每一帧渲染的hook
 event.on('onSimulationFrame', (msg) => {
   // console.log(msg);
