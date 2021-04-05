@@ -1,13 +1,13 @@
-const { server_info_model, user_info_model } = require('../../models');
+const { servers_model, users_model, events_model } = require('../../models');
 const { json2string } = require('../../utils/jon2str');
 class eventController {
   async UpdatePlayersData(msg) {
-    const data = msg.data.data
-    const ucidArr = Object.keys(data)
-    const model = await user_info_model.findAll({ raw: true, where: { ucid: ucidArr }, attributes: { exclude: ['id'] } })
+    const PlayerData = msg.data.PlayerData
+    const ucidArr = Object.keys(PlayerData)
+    const model = await users_model.findAll({ raw: true, where: { ucid: ucidArr }, attributes: { exclude: ['id'] } })
     let result = []
-    for (const key in data) {
-      const item2 = data[key];
+    for (const key in PlayerData) {
+      const item2 = PlayerData[key];
       const findIndex = model.findIndex(item => {
         if (item.ucid === item2.ucid) {
           item.name = item2.name
@@ -48,16 +48,18 @@ class eventController {
       })
       findIndex < 0 ? result.push(item2) : result.push(model[findIndex])
     }
-    user_info_model.bulkCreate(result,
+    users_model.bulkCreate(result,
       {
         updateOnDuplicate: ['name', 'ucid', 'lang', 'ping', 'ipaddr', 'ship_takeoffs', 'airfield_takeoffs', 'farp_takeoffs', 'other_takeoffs', 'subslot', 'subtype', 'masterslot', 'teamkills', 'kills_infantry', 'kills_fortification', 'kills_armor', 'kills_air_defense', 'kills_artillery', 'kills_ships', 'kills_planes', 'kills_helicopters', 'kills_unarmed', 'kills_other', 'deaths', 'ejections', 'crashes', 'airfield_landings', 'ship_landings', 'farp_landings', 'other_landings', 'pvp', 'missionhash', 'qq', 'createdAt', 'updatedAt']
       }
     )
-
+    const eventData = msg.data.eventData
+    eventData.map(item => { item.missionhash = msg.data.missionhash })
+    events_model.bulkCreate(eventData)
   }
   async UpdateMission(msg) {
     const data = await json2string(msg.data);
-    server_info_model.create(data, { logQueryParameters: false }).catch((err) => { });
+    servers_model.create(data).catch((err) => { });
   }
 }
 

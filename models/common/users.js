@@ -314,7 +314,7 @@ module.exports = sequelize => {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: DataTypes.NOW,
+      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -323,7 +323,7 @@ module.exports = sequelize => {
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: DataTypes.NOW,
+      defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: null,
@@ -331,10 +331,10 @@ module.exports = sequelize => {
     }
   };
   const options = {
-    tableName: "user_info",
+    tableName: "users",
     comment: "",
     indexes: []
   };
-  const UserInfoModel = sequelize.define("user_info_model", attributes, options);
-  return UserInfoModel;
+  const UsersModel = sequelize.define("users_model", attributes, options);
+  return UsersModel;
 };

@@ -13,95 +13,32 @@ module.exports = sequelize => {
       comment: null,
       field: "id"
     },
-    ucid: {
+    name: {
       type: DataTypes.STRING(255),
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
-      comment: null,
-      field: "ucid"
+      comment: "任务文件",
+      field: "name"
     },
-    killAlias: {
+    filename: {
       type: DataTypes.STRING(255),
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
-      comment: null,
-      field: "killAlias"
+      comment: "任务名称",
+      field: "filename"
     },
-    killerUnitType: {
-      type: DataTypes.STRING(255),
+    description: {
+      type: DataTypes.TEXT,
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
-      comment: null,
-      field: "killerUnitType"
-    },
-    weaponName: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "weaponName"
-    },
-    victimPlayerID: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "victimPlayerID"
-    },
-    victimUnitType: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "victimUnitType"
-    },
-    victimAlias: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "victimAlias"
-    },
-    victimSide: {
-      type: DataTypes.BIGINT,
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "victimSide"
-    },
-    killerSide: {
-      type: DataTypes.BIGINT,
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "killerSide"
-    },
-    qq: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: null,
-      field: "qq"
+      comment: "任务描述",
+      field: "description"
     },
     missionhash: {
       type: DataTypes.STRING(255),
@@ -111,6 +48,60 @@ module.exports = sequelize => {
       autoIncrement: false,
       comment: "任务hash",
       field: "missionhash"
+    },
+    theatre: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "地图名称",
+      field: "theatre"
+    },
+    map: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "地图坐标",
+      field: "map"
+    },
+    coalition: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "阵营详情",
+      field: "coalition"
+    },
+    result_red: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "result_red"
+    },
+    result_blue: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: null,
+      field: "result_blue"
+    },
+    date: {
+      type: DataTypes.DATEONLY,
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "游戏日期",
+      field: "date"
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -132,10 +123,10 @@ module.exports = sequelize => {
     }
   };
   const options = {
-    tableName: "kills",
+    tableName: "servers",
     comment: "",
     indexes: []
   };
-  const KillsModel = sequelize.define("kills_model", attributes, options);
-  return KillsModel;
+  const ServersModel = sequelize.define("servers_model", attributes, options);
+  return ServersModel;
 };

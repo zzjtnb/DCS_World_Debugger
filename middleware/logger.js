@@ -9,43 +9,38 @@ const config = {
       type: "dateFile",
       filename: path.join(__dirname, '../logs/db/success/sql.log'),
       pattern: "-yyyy-MM-dd.log",
-      maxLogSize: 1048576, //单文件最大限制(单位: bytes)
     },
     sqlErrorFile: {
       type: "dateFile",
       filename: path.join(__dirname, '../logs/db/error/err.log'),
       pattern: "-yyyy-MM-dd.log",
-      maxLogSize: 1048576, //单文件最大限制(单位: bytes)
     },
     appFile: {
       type: "dateFile",
       filename: path.join(__dirname, '../logs/app/info.log'),
       pattern: "-yyyy-MM-dd.log",
-      maxLogSize: 1048576,//文件最大存储空间，当文件内容超过文件存储空间会自动生成一个文件test.log.1的序列自增长的文件
+      // maxLogSize: 1048576,//文件最大存储空间，当文件内容超过文件存储空间会自动生成一个文件test.log.1的序列自增长的文件
     },
     accessError: {
       type: "dateFile",
       filename: path.join(__dirname, '../logs/http/error.log'),
       pattern: "-yyyy-MM-dd.log",
-      maxLogSize: 1048576,
     },
     access: {
       type: "dateFile",
       category: "http",
       filename: path.join(__dirname, '../logs/http/access.log'),
       pattern: "-yyyy-MM-dd.log",
-      maxLogSize: 1048576,
     },
     serverFile: {
       type: 'file',
       filename: path.join(__dirname, '../logs/server/info.log'),
       pattern: "-yyyy-MM-dd.log",
-      maxLogSize: 1048576,
     },
     debugFile: {
       type: 'file',
       filename: path.join(__dirname, '../logs/debug/debug.log'),
-      pattern: "-yyyy-MM-dd.log", maxLogSize: 10,
+      pattern: "-yyyy-MM-dd.log",
     }
   },
   categories: {

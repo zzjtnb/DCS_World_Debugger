@@ -56,11 +56,11 @@ event.on('onSimulationStop', (msg) => {
 //玩家连接
 event.on('playerLogin', async (msg) => {
   if (!msg.data.ucid) return;
-  const [user, created] = await user_info_model.findOrCreate({
+  const [user, created] = await users_model.findOrCreate({
     raw: true, where: { ucid: msg.data.ucid }, defaults: msg.data
   });
   if (created) return;
-  user_info_model.update(msg.data, { where: { ucid: msg.data.ucid } }).catch((err) => { });
+  users_model.update(msg.data, { where: { ucid: msg.data.ucid } }).catch((err) => { });
 });
 //改变角色
 event.on('change_slot', (msg) => {
