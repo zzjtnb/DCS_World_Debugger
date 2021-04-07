@@ -1,6 +1,6 @@
 //引入net模块
 const net = require("net");
-const { debug_mod } = require('../utils/debugmod');
+
 const event = require('../middleware/event');
 const { TCPCONFIG } = require('../config/common')
 const { serverStatus } = require('../middleware/logger');
@@ -41,7 +41,6 @@ function onClientConnection(client) {
       if (!result) return
       switch (result.type) {
         case 'ServerData':
-          // debug_mod(result)
           event.emit(result.event, result)
           break;
         case 'ServerStatus':

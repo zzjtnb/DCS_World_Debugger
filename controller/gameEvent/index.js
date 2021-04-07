@@ -1,5 +1,6 @@
 const { servers_model, users_model, events_model } = require('../../models');
 const { json2string } = require('../../utils/jon2str');
+const { debug_mod } = require('../../utils/debugmod');
 let bot = null
 if (bot == null) {
   bot = require('../../qq/bot');
@@ -84,7 +85,13 @@ class eventController {
   }
   async UpdateMission(msg) {
     const data = await json2string(msg.data);
-    servers_model.create(data).catch((err) => { });
+    try {
+      const result = await servers_model.create(data)
+      // console.log(result);
+      //  debug_mod(data)
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 
