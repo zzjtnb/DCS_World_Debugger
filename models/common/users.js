@@ -24,9 +24,9 @@ module.exports = sequelize => {
     },
     ucid: {
       type: DataTypes.STRING(255),
-      allowNull: false,
-      defaultValue: "0",
-      primaryKey: true,
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
       autoIncrement: false,
       comment: "玩家标识",
       field: "ucid",
@@ -285,7 +285,7 @@ module.exports = sequelize => {
       field: "other_landings"
     },
     pvp: {
-      type: DataTypes.INTEGER(255),
+      type: DataTypes.INTEGER(11),
       allowNull: true,
       defaultValue: null,
       primaryKey: false,

@@ -13,8 +13,26 @@ module.exports = sequelize => {
       comment: null,
       field: "id"
     },
-    name: {
+    map: {
       type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "地图坐标",
+      field: "map"
+    },
+    theatre: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+      defaultValue: null,
+      primaryKey: false,
+      autoIncrement: false,
+      comment: "地图名称",
+      field: "theatre"
+    },
+    name: {
+      type: DataTypes.TEXT,
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
@@ -23,7 +41,7 @@ module.exports = sequelize => {
       field: "name"
     },
     filename: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
@@ -41,31 +59,13 @@ module.exports = sequelize => {
       field: "description"
     },
     missionhash: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.TEXT,
       allowNull: true,
       defaultValue: null,
       primaryKey: false,
       autoIncrement: false,
       comment: "任务hash",
       field: "missionhash"
-    },
-    theatre: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: "地图名称",
-      field: "theatre"
-    },
-    map: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      defaultValue: null,
-      primaryKey: false,
-      autoIncrement: false,
-      comment: "地图坐标",
-      field: "map"
     },
     coalition: {
       type: DataTypes.TEXT,
