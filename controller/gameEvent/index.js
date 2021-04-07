@@ -73,7 +73,7 @@ class eventController {
           {
             type: "text",
             data: {
-              text: `${contentArr.join('\n')}`
+              text: `${contentArr.join('\n---------------\n')}`
             }
           },
         ]
