@@ -59,9 +59,9 @@ class eventController {
         updateOnDuplicate: ['name', 'ucid', 'lang', 'ping', 'ipaddr', 'ship_takeoffs', 'airfield_takeoffs', 'farp_takeoffs', 'other_takeoffs', 'subslot', 'subtype', 'masterslot', 'teamkills', 'kills_infantry', 'kills_fortification', 'kills_armor', 'kills_air_defense', 'kills_artillery', 'kills_ships', 'kills_planes', 'kills_helicopters', 'kills_unarmed', 'kills_other', 'deaths', 'ejections', 'crashes', 'airfield_landings', 'ship_landings', 'farp_landings', 'other_landings', 'pvp', 'missionhash', 'qq', 'createdAt', 'updatedAt']
       }
     )
-    const eventData = msg.data.eventData
+    let eventData = msg.data.eventData
     if (eventData) {
-      const contentArr = []
+      let contentArr = []
       eventData.map(item => {
         item.missionhash = msg.data.missionhash
         if (item.eventName == 'kill') {
@@ -70,11 +70,12 @@ class eventController {
       })
       events_model.bulkCreate(eventData)
       if (contentArr.length > 0) {
+        contentArr = unique(contentArr)
         var message = [
           {
             type: "text",
             data: {
-              text: `${contentArr.join('\n---------------\n')}`
+              text: `${contentArr.join('\n--------------------------------\n')}`
             }
           },
         ]
@@ -89,11 +90,15 @@ class eventController {
       const result = await servers_model.create(data)
       // console.log(result);
       //  debug_mod(data)
+      console.log('任务写入成功');
     } catch (error) {
       console.log(error);
     }
   }
 }
 
+function unique(arr) {
+  return Array.from(new Set(arr))
+}
 
 module.exports = new eventController();
